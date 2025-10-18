@@ -3,7 +3,7 @@
 <html lang="cs">
 <head>
   <meta charset="UTF-8">
-  <title>Vztahový hra/dar</title>
+  <title>Vztahový (h)radar</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
   <style>
@@ -132,45 +132,6 @@
       }
     }
     
-    #flash-message {
-      position: fixed;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      background-color: #9a3449;
-      color: white;
-      font-size: 2em;
-      font-weight: bold;
-      padding: 0.5em 1em;
-      border-radius: 10px;
-      z-index: 1000;
-      display: none;
-      box-shadow: 0 4px 15px rgba(0,0,0,0.3);
-    }
-    
-    .flash-animation {
-      animation: flash-appear 1.2s ease-out;
-    }
-    
-    @keyframes flash-appear {
-      0% {
-        opacity: 0;
-        transform: translate(-50%, -50%) scale(0.5);
-      }
-      20% {
-        opacity: 1;
-        transform: translate(-50%, -50%) scale(1.2);
-      }
-      80% {
-        opacity: 1;
-        transform: translate(-50%, -50%) scale(1);
-      }
-      100% {
-        opacity: 0;
-        transform: translate(-50%, -50%) scale(0.8);
-      }
-    }
-    
     #loading {
       display: none;
       text-align: center;
@@ -287,13 +248,6 @@
       #final h2 {
         font-size: 1.4em;
       }
-      
-      #flash-message {
-        font-size: 1.5em;
-        padding: 0.4em 0.8em;
-        max-width: 80%;
-        text-align: center;
-      }
     }
     
     @media (max-width: 480px) {
@@ -379,14 +333,11 @@
     <div id="loading-text" style="font-size: 0.5em; margin-top: 0.5em; color: #666;"></div>
   </div>
   
-  <div id="flash-message">Srabe!</div>
-  
   <button onclick="drawQuestion()">🎮 Začni hrát</button>
-  <button id="pass-button" onclick="passQuestion()">🔄 Hodit otázku na druhého</button>
 
   <div id="final">
     <h2>✅ Dokončeno!</h2>
-    <p>Vaše heslo je: <strong>KROKVPŘED</strong></p>
+    <p>Vaše heslo je: <strong>SLADKAODMENA</strong></p>
     <p>Pošlete toto heslo Kláře jako potvrzení, že jste prošli hrou.</p>
   </div>
 
@@ -399,9 +350,9 @@
       "Jak vnímám naši sexualitu teď – a co bych si přál/a změnit?",
       "Čeho se bojím, že by se mohlo stát s naším vztahem za 5 let?",
       "Kdybych měl/a víc času jen pro sebe, co bych dělal/a?",
-      "Jak poznám, že mě opravdu vidíš – ne jen jako partnera, ale jako člověka?",
       "Co bych potřeboval/a, abych se cítil/a víc jako tým?",
-      "Jaké věci bych chtěl/a říct našemu dítěti o lásce, až bude dospělé?"
+      "Jaké věci bych chtěl/a říct našemu dítěti o lásce, až bude dospělé?",
+      "V čem ses od začátku našeho vztahu nejvíc změnil/a – a bojíš se, že to nevidím?"
     ];
 
     const loadingTexts = [
@@ -490,28 +441,6 @@
       }, 600);
     }
 
-    // Pass question to the other person
-    function passQuestion() {
-      // Show flash message
-      showFlashMessage();
-      
-      // Just flip the turn indicator, keep the same question
-      isMaruskasTurn = !isMaruskasTurn;
-      updateTurnIndicatorWithFlip();
-    }
-    
-    // Show flash message animation
-    function showFlashMessage() {
-      const flashElement = document.getElementById('flash-message');
-      flashElement.style.display = 'block';
-      flashElement.classList.add('flash-animation');
-      
-      setTimeout(() => {
-        flashElement.style.display = 'none';
-        flashElement.classList.remove('flash-animation');
-      }, 1200); // Match the animation duration
-    }
-
     // Initialize progress bar and turn indicator on page load
     window.onload = function() {
       updateCounter();
@@ -562,7 +491,6 @@
       document.getElementById("question").style.display = "none";
       document.getElementById("loading").style.display = "block";
       document.querySelector("button[onclick='drawQuestion()']").disabled = true;
-      document.getElementById("pass-button").disabled = true;
       
       // Simulate loading time (1-2 seconds for the joke)
       setTimeout(() => {
@@ -578,11 +506,9 @@
         document.getElementById("question").style.display = "block";
         document.getElementById("question").textContent = questions[index];
         document.querySelector("button[onclick='drawQuestion()']").disabled = false;
-        document.getElementById("pass-button").disabled = false;
         
-        // Show turn indicator and pass button when first real question is loaded
+        // Show turn indicator when first real question is loaded
         document.getElementById("turn-indicator").style.display = "block";
-        document.getElementById("pass-button").style.display = "inline-block";
         
         // Don't flip turns here anymore - it happens immediately when button is clicked
       }, 3000); // Fixed 3 second delay
@@ -595,7 +521,6 @@
       
       document.getElementById("question").style.display = "none";
       document.querySelector("button[onclick='drawQuestion()']").style.display = "none";
-      document.getElementById("pass-button").style.display = "none";
       document.getElementById("final").style.display = "block";
     }
   </script>
