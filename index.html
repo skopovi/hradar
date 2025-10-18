@@ -325,7 +325,7 @@
     <span id="turn-text">👰🏻‍♀️ Maruška se ptá Standy 🤵🏻</span>
   </div>
 
-  <div id="question">Losujte otázky, střídejte se v odpovědích. Po dokončení získáte heslo pro Kláru.</div>
+  <div id="question">Losujte otázky, střídejte se v odpovědích. Po dokončení získáte heslo.</div>
   <div id="loading">
     <div id="safari-parade">
       <!-- Animals will be dynamically generated -->
@@ -362,7 +362,6 @@
       "Načítáme vztahovou moudrost...",
       "Připravujeme srdeční záležitosti...",
       "Šťouráme v citlivých tématech...",
-      "Calibrujeme cupidovu šipku...",
       "Destilujeme intimní momenty...",
       "Sestavujeme puzzle vašeho vztahu...",
       "Probouzíme hlubší spojení...",
@@ -521,6 +520,7 @@
       
       document.getElementById("question").style.display = "none";
       document.querySelector("button[onclick='drawQuestion()']").style.display = "none";
+      document.getElementById("turn-indicator").style.display = "none";
       document.getElementById("final").style.display = "block";
     }
   </script>
